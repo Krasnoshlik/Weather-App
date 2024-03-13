@@ -1,0 +1,124 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&display=swap');
+
+body {
+  background-color: rgba(128, 128, 128, 0.423);
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  font-family: "Assistant", sans-serif;
+  font-weight: 300;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  background-color: white;
+  display: flex;
+  border-radius: 4px;
+}
+.buttons {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+}
+.today,.tomorrow {
+  font-family: "Assistant", sans-serif;
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  color: rgb(161, 159, 159);
+}
+.active {
+  color: black;
+  font-weight: 500;
+}
+.left {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.left input {
+  background-color: rgb(222, 222, 222);
+  border-radius: 14px;
+  padding: 6px 14px 6px;
+  border: none;
+  color: black;
+  outline: none;
+}
+.input-wrapper {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.input-button {
+  cursor: pointer;
+  width: 26px;
+  height: 26px;
+  background-color: rgb(222, 222, 222);
+  padding: 6px;
+  border: none;
+  border-radius: 14px;
+}
+.img-wrapper {
+  max-width: 120px;
+  margin: 30px 0px 30px;
+}
+.general-info {
+  text-align: center;
+}
+.general-info h1 {
+  font-size: 50px;
+  font-weight: 300;
+}
+.general-info h2 {
+  font-size: 14px;
+}
+.middle-line {
+  margin: 20px 0px 20px;
+  width: 80%;
+  height: 1px;
+  background-color: rgb(222, 222, 222);
+}
+.more-info {
+  text-align: center;
+}
+.more-info h2 {
+  font-size: 14px;
+}
+.right {
+  background-color: rgb(222, 222, 222);
+  padding: 30px;
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+.info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(116, 138, 224);
+  gap: 10px;
+  color: white;
+  border-radius: 16px;
+}
+h2 {
+  font-size: 18px;
+  margin: 0;
+  font-weight: 400;
+}
+h1 {
+  font-size: 20px;
+  margin: 0;
+  font-weight: 400;
+}
+h3 {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 400;
+}
