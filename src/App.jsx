@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const api = {
   key: "f9e92e0fdf338f8991e58ed830d7a097",
@@ -7,11 +7,13 @@ const api = {
 
 function App() {
   const [city, setCity] = useState('');
+  const [weather, setWeather] = useState({});
+
 
   const searchPressed = () => {
     fetch(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
     .then((res) => res.json())
-    .then((data) => {console.log(data)})
+    .then((data) => {setWeather(data)})
   }
 
   return (
@@ -26,8 +28,8 @@ function App() {
           </div>
 
           <div className="general-info">
-          <h1>31°C</h1>
-          <h2>Mostly Cloudy</h2>
+          <h1>{typeof weather.main !== 'undefined' ? (weather.main.temp) : 31}°C</h1>
+          <h2>{typeof weather.main !== 'undefined' ? (weather.weather[0].main) : 'Clouds'}</h2>
           </div>
 
           <span className="middle-line"></span>
@@ -41,42 +43,37 @@ function App() {
 
         </div>
         <div className="right">
-          <div className="buttons">
-          <button className="today active">Today</button>
-          <button className="tomorrow">Tomorrow</button>
-          </div>
           <div className="info-grid">
 
             <div className="info">
               <h2>Wind</h2>
-              <h1>6 km/h</h1>
-              <h3>East</h3>
+              <h1>{typeof weather.main !== 'undefined' ? (weather.wind.speed) : 6}km/h</h1>
+              <h3> Degree : {typeof weather.main !== 'undefined' ? (weather.wind.deg) : 200}</h3>
             </div>
 
             <div className="info">
               <h2>Humadity</h2>
-              <h1>69%</h1>
+              <h1>{typeof weather.main !== 'undefined' ? (weather.main.humidity) : 6}%</h1>
             </div>
 
             <div className="info">
               <h2>Real Feel</h2>
-              <h1>31 °C</h1>
+              <h1>{typeof weather.main !== 'undefined' ? (weather.main.feels_like) : 31 }°C</h1>
             </div>
 
             <div className="info">
-              <h2>UV Index</h2>
-              <h1>3</h1>
-              <h3>Moderate</h3>
+              <h2>Desctription:</h2>
+              <h1>{typeof weather.main !== 'undefined' ? (weather.weather[0].description) : 'Cloudy'}</h1>
             </div>
 
             <div className="info">
               <h2>Pressure</h2>
-              <h1>1000 mb</h1>
+              <h1>{typeof weather.main !== 'undefined' ? (weather.main.pressure) : 1000 }mb</h1>
             </div>
 
             <div className="info">
               <h2>Change of rain</h2>
-              <h1>70%</h1>
+              <h1>{typeof weather.main !== 'undefined' ? (weather.rain) : 70 }%</h1>
             </div>
 
             <div className="info">
@@ -86,7 +83,7 @@ function App() {
 
             <div className="info">
               <h2>Sun</h2>
-              <h1>Rise 5.17 am</h1>
+              <h1>Rise {typeof weather.main !== 'undefined' ? (new Date( weather.sys.sunrise * 1000).getHours()) : 5.12 } am</h1>
             </div>
 
             <div className="info">
