@@ -8,40 +8,41 @@ const api = {
 function App() {
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState({});
-  const [day, setDay] = useState('');
-  const [time, setTime] = useState('');
-  const [img, setImg] = useState('./clouds.png')
+  const [day, setDay] = useState('21-July-2023');
+  const [time, setTime] = useState('15:04');
+  const [img, setImg] = useState('./clouds.png');
 
-  const searchPressed = () => {
-    fetch(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
+  async function searchPressed() {
+    await fetch(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
     .then((res) => res.json())
     .then((result) => {setWeather(result)})
+    .then(() => {
+      DayCalc();
+    })
   }
 
   function DayCalc() {
-    if(typeof weather.main !== 'undefined') {
-      const datatime = new Date(weather.dt * 1000).toLocaleString('default');
-      console.log(datatime)
-      const datatimeSplited = datatime.split(',');
-      const data = datatimeSplited[0];
-      const time = datatimeSplited[1];
+      const datatime = new Date()
+      const data = datatime.getFullYear()+'-'+(datatime.getMonth()+1)+'-'+datatime.getDate();
+      const time = datatime.getHours() + ":" + datatime.getMinutes() + ":" + datatime.getSeconds();
       setDay(data)
       setTime(time)
-    } else {
-      return undefined
-    }
   }
 
   function WeatherImage() {
+    if(typeof weather.main !== 'undefined') {
     if(weather.weather[0].main === 'Clouds') {
-    setImg('./Sun and cloud.png')
-    }
-  }
+    setImg('./Sun and cloud.png');
+    } else if (weather.weather[0].main === 'Rain') {
+      setImg('./rain.png');
+    } else if (weather.weather[0].main === 'Tunder') {
+      setImg('./tunder.png')
+    }}}
 
-console.log(weather)
-  useEffect(() => {
-    DayCalc();
-  })
+    useEffect(() => {
+      WeatherImage();
+    },[])
+
   return (
       <div className="container">
         <div className="left">
@@ -50,7 +51,7 @@ console.log(weather)
           <button onClick={searchPressed} className="input-button"><img src="./search.png" width='100%' alt="search"/></button>
           </div>
           <div className="img-wrapper">
-            <img src={img} alt="Sun and cloud" width='100%' onC/>
+            <img src={img} alt="Sun and cloud" width='100%'/>
           </div>
 
           <div className="general-info">
@@ -62,8 +63,8 @@ console.log(weather)
 
           <div className="more-info">
             <h2>Date and time of request <br/> information:</h2>
-            <h2>{day.length > 0 ? (day) : '21-July-2023'}</h2>
-            <h2>{time.length > 0 ? (time) : '15:04'}</h2>
+            <h2>{day}</h2>
+            <h2>{time}</h2>
           </div>
 
 
